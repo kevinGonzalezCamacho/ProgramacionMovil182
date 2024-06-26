@@ -1,54 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect}from 'react';
+import {  StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
+
 
 export default function App() {
+  const [user, setUser] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() =>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+   .then(response => response.json())
+   .then(data=>{setUser(data), setLoading(false)})
+  },[])
+
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <Text>Cargando...</Text>
+        <ActivityIndicator size='large' color='#B5D6DB' />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <SectionList style={styles.sectionList}
-        sections={[
-          {
-            title: 'Grupo A',
-            data: [
-              { key: '1', name: 'Kevin' },
-              { key: '2', name: 'Armando' },
-              { key: '3', name: 'Abram' },
-              { key: '4', name: 'Alfredo' },
-              { key: '5', name: 'Ivan' },
-              { key: '6', name: 'Ivan' },
-              { key: '7', name: 'Ivan' },
-            ],
-          },
-          {
-            title: 'Grupo B',
-            data: [
-              { key: '1', name: 'Kevin' },
-              { key: '2', name: 'Armando' },
-              { key: '3', name: 'Abram' },
-              { key: '4', name: 'Alfredo' },
-              { key: '5', name: 'Ivan' },
-              { key: '6', name: 'Ivan' },
-              { key: '7', name: 'Ivan' },
-            ],
-          },
-          {
-            title: 'Grupo C',
-            data: [
-              { key: '1', name: 'Kevin' },
-              { key: '2', name: 'Armando' },
-              { key: '3', name: 'Abram' },
-              { key: '4', name: 'Alfredo' },
-              { key: '5', name: 'Ivan' },
-              { key: '6', name: 'Ivan' },
-              { key: '7', name: 'Ivan' },
-            ],
-          },
-        ]}
-        renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
-        renderSectionHeader={({ section}) => (<Text style={styles.section}>{section.title}</Text>)}
-
-    />
-
+    
+      <FlatList
+        data={user}
+        renderItem={({ item }) => (
+          <View style={styles.item}><Text style={styles.item}>{item.name}, {item.phone} </Text>
+          </View>
+        )}
+      />
     </View>
   );
 }
@@ -68,7 +52,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     height: 50,
     borderColor: '#E04E33',
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   section: {
     fontSize: 16,
