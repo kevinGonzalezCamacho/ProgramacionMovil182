@@ -1,20 +1,54 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-
-
+import React from 'react';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  const [text,selText] = useState('valor Default')
-  const [submit,setSumit] = useState('')
   return (
     <View style={styles.container}>
-      <Text >Componentes TextInput: {submit} </Text>
+      <SectionList style={styles.sectionList}
+        sections={[
+          {
+            title: 'Grupo A',
+            data: [
+              { key: '1', name: 'Kevin' },
+              { key: '2', name: 'Armando' },
+              { key: '3', name: 'Abram' },
+              { key: '4', name: 'Alfredo' },
+              { key: '5', name: 'Ivan' },
+              { key: '6', name: 'Ivan' },
+              { key: '7', name: 'Ivan' },
+            ],
+          },
+          {
+            title: 'Grupo B',
+            data: [
+              { key: '1', name: 'Kevin' },
+              { key: '2', name: 'Armando' },
+              { key: '3', name: 'Abram' },
+              { key: '4', name: 'Alfredo' },
+              { key: '5', name: 'Ivan' },
+              { key: '6', name: 'Ivan' },
+              { key: '7', name: 'Ivan' },
+            ],
+          },
+          {
+            title: 'Grupo C',
+            data: [
+              { key: '1', name: 'Kevin' },
+              { key: '2', name: 'Armando' },
+              { key: '3', name: 'Abram' },
+              { key: '4', name: 'Alfredo' },
+              { key: '5', name: 'Ivan' },
+              { key: '6', name: 'Ivan' },
+              { key: '7', name: 'Ivan' },
+            ],
+          },
+        ]}
+        renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+        renderSectionHeader={({ section}) => (<Text style={styles.section}>{section.title}</Text>)}
 
-      <TextInput style={styles.Input} placeholder = 'Excribe Texto...' onChangeText={ (t)=>selText=(t)} Value={text}/>
-       <Button title='Precioname...' onPress={()=>{setSumit(text); alert('Texto enviado')}}/>
-      
-      <StatusBar style="auto"/>
+    />
+
     </View>
   );
 }
@@ -24,16 +58,24 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretched',
     justifyContent: 'center',
+    paddingTop: 40
   },
-Input:{
-  backgroundColor: '#DCD6E6',
-  width: '80%',
-  height: '60',
-  borderBottomColor: '#EB1406',
-  borderBottomWidth: 2,
 
-}
+  item: {
+    padding: 10,
+    fontSize: 24,
+    height: 50,
+    borderColor: '#E04E33',
+    borderBottomWidth: 2
+  },
+  section: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    paddingTop:4,
+    paddingBottom: 4,
+    
+  }
   
 });
