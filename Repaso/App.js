@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ImageBackground } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import Prueba from './screens/Pruebas';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  useEffect(() => {
+ /* useEffect(() => {
     async function prepare() {
       try {
         
@@ -25,9 +26,9 @@ export default function App() {
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
-
+*/
   return (
-    <ImageBackground source={require('./assets/images/nike.jpg')} style={styles.backgroundImage}>
+    /*<ImageBackground source={require('./assets/images/nike.jpg')} style={styles.backgroundImage}>
       <View style={styles.container}>
         <View style={styles.formContainer}>
           <Text>Formulario: </Text>
@@ -47,7 +48,8 @@ export default function App() {
         </View>
         <StatusBar style="auto" />
       </View>
-    </ImageBackground>
+    </ImageBackground>*/
+    <Prueba> </Prueba>
   );
 }
 
